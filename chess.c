@@ -79,7 +79,7 @@ Watchlist *initWatchlist()
     return w;
 }
 
-//init a moveset of size sz
+//init a moveset 
 Moveset *initMoveset()
 {
 
