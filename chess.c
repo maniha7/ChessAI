@@ -247,7 +247,7 @@ void removeWatch(Piece *piece, Gamestate *game)
 void addMove(Piece *piece, Gamestate *game, int move)
 {
 
-    //shouldn't run out of space unless piece accumulates to many moves by some error
+    //shouldn't run out of space unless piece accumulates too many moves by some error
     if (piece->moveset->used != piece->moveset->size)
     {
 
