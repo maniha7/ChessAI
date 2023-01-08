@@ -1,0 +1,4 @@
+import pygame
+
+blackPieces = {'king':pygame.image.load('Pieces/BlackKing.png'), 'queen':pygame.image.load('Pieces/BlackQueen.png'), 'rook':pygame.image.load('Pieces/BlackRook.png'), 'bishop':pygame.image.load('Pieces/BlackBishop.png'), 'knight':pygame.image.load('Pieces/BlackKnight.png'), 'pawn':pygame.image.load('Pieces/BlackPawn.png')}
+whitePieces = {'king':pygame.image.load('Pieces/WhiteKing.png'), 'queen':pygame.image.load('Pieces/WhiteQueen.png'), 'rook':pygame.image.load('Pieces/WhiteRook.png'), 'bishop':pygame.image.load('Pieces/WhiteBishop.png'), 'knight':pygame.image.load('Pieces/WhiteKnight.png'), 'pawn':pygame.image.load('Pieces/WhitePawn.png')}
