@@ -62,11 +62,9 @@ class AI:
         pieceData = np.zeros((32, 6), dtype=np.int32)
         for i in range(32):
             piece = self.GUI.cPieces[i]
-
             alive = 0
             if piece.isAlive():
                 alive = 1
-
             ptype = 0
             if i<=15:
                 ptype = self.wtypes[piece.type]
@@ -78,7 +76,6 @@ class AI:
 
 
     def AIvAI(self):
-
         pieceData = self.getCGamestate()
         gameString = ""
         for i in range(32):
@@ -138,9 +135,7 @@ class AI:
                     else:
                         self.GUI.AIPieceRes = piece
                         self.GUI.AIMoveRes = (x, y)
-
-
-
+                        
 
     def cCheckMoves(self):
         #run infinitely as thread?
@@ -209,60 +204,3 @@ class AI:
                         self.GUI.AIMoveRes = (x,y)
                         self.GUI.analyzing = False
                         self.GUI.gamestate.changeTurn()
-
-
-
-
-    def checkMoves(self, color, depth, move=None):
-        if self.tested == 0:
-            self.GUI.speedTesting = True
-            self.t1 = time.perf_counter()
-        if color == 'white':
-            nextColor = 'black'
-        else:
-            nextColor = 'white'
-        #base case: return first move in highest rated sequence
-        if depth==self.maxDepth:
-            #reset board to actual position
-            return move
-
-        else:
-            self.tested+=1
-            if self.tested == 600:
-                print(time.perf_counter() - self.t1)
-                self.GUI.speedTesting=False
-                for piece in self.GUI.whitePieces:
-                    piece.draw(self.GUI.screen)
-                for piece in self.GUI.blackPieces:
-                    piece.draw(self.GUI.screen)
-
-            firstMove = move
-
-            #get dict of pieces for player of current move
-            curPieces = self.GUI.whitePieces if color=='white' else self.GUI.blackPieces
-
-            #for each piece, gets its moves, then for each move, make that move and recursively simulate a response from the opponent
-            for piece in curPieces.copy():
-                if piece.isAlive():
-                    piece.getMoves()
-
-                    for pmove in piece.moves:
-
-                        #piece.move returns [original piece x, original piece y, piece taken by this move || None], store to undo move
-                        res = piece.AIMove(pmove, self.screen)
-                        if res!=False:
-                            if not self.GUI.speedTesting:
-                                #self.screen.blit(piece.image, (pmove[0]*piece.tileSize, pmove[1]*piece.tileSize))
-                                pygame.display.flip()
-                            #time.sleep(.3)
-                            #recursively check deeper moves
-                            self.checkMoves(nextColor,depth+1,move=firstMove)
-                            #unmake move after recursion is complete
-                            piece.returnMove((piece.x,piece.y), (res[0],res[1]), res[2], res[3],res[4], draw = not self.GUI.speedTesting)
-
-
-
-
-    def analyzeMove(self):
-        pass
-
